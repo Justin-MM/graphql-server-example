@@ -8,6 +8,9 @@ const resolvers = {
         games() {
             return db.games
         },
+        game(_, args) {
+            return db.games.find((g: { id: any; }) => g.id === args.id)
+        },
         reviews() {
             return db.reviews
         },
@@ -16,6 +19,19 @@ const resolvers = {
         },
         authors() {
             return db.authors
+        }
+    },
+    Game: {
+        reviews(parent) {
+            return db.reviews.filter((review) => review.game_id === parent.id)
+        }
+    },
+    Review: {
+        author(parent) {
+            return db.authors.find((a) => a.id === parent.author_id)
+        },
+        game(parent) {
+            return db.games.find((g) => g.id === parent.game_id)
         }
     }
 }
