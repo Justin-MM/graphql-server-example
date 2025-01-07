@@ -34,4 +34,8 @@ export const typeDefs = `#graphql
     game(id: ID!): Game
     authors: [Author]
  }
+
+ type Mutation {
+    deleteGame(id: ID!): [Game]
+ }
 `;
